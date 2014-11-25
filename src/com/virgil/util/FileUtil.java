@@ -1,10 +1,15 @@
 package com.virgil.util;
 
 import java.io.*;
+import java.util.Properties;
 
 public class FileUtil {
-	
-	public static void recursionDeleteFile(File file){
+
+    /**
+     * Delete all files within File
+     * @param file File
+     */
+	public static void deleteFile(File file){
         if(file.isFile()){
             file.delete();
             return;
@@ -16,11 +21,18 @@ public class FileUtil {
                 return;
             }
             for(File f : childFile){
-            	recursionDeleteFile(f);
+                deleteFile(f);
             }
             file.delete();
         }
     }
+
+    /**
+     * Write Data to File
+     * @param data String
+     * @param filePath String
+     * @param isAppend boolean
+     */
 	public static void writeToFile(String data, String filePath, boolean isAppend) {
 		File file = new File(filePath);
 		if (!file.exists()) {
@@ -46,28 +58,83 @@ public class FileUtil {
 			}
 		}
 	}
+
+    /**
+     * Read File From Path
+     * @param fileName String
+     * @return String
+     */
     public static String readFile(String fileName){
         String str=null;
         BufferedReader reader=null;
         try {
             reader=new BufferedReader(new FileReader(fileName));
             str=reader.readLine();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }finally{
             if(reader!=null){
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
         }
         return str;
     }
+
+    /**
+     * 读取Properties
+     * @param path FileInfo
+     * @return Properties
+     */
+    public static Properties readProperties(String path) {
+        Properties pro = null;
+        InputStream in = null;
+        try {
+            in = new FileInputStream(path);
+            pro = new Properties();
+            pro.load(in);
+
+        } catch (IOException e) {
+            pro = null;
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return pro;
+    }
+
+    /**
+     * Write Properties To File
+     * @param pro Properties
+     * @param path String
+     */
+    public static void writeProperties(Properties pro,String path){
+        if(pro!=null&&!StringUtil.emptyOrNull(path)){
+            OutputStream out=null;
+            try {
+                out =new FileOutputStream(path);
+                pro.store(out,"");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    if(out!=null){
+                        out.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }

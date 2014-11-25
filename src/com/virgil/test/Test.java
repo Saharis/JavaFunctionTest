@@ -1,10 +1,5 @@
 package com.virgil.test;
 
-import com.alibaba.fastjson.JSONObject;
-import com.virgil.reflect.ReflectUtil;
-import com.virgil.util.FileUtil;
-import com.virgil.util.LogUtil;
-
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,9 +9,12 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ctrip.business.enumclass.BasicBusinessTypeEnum;
 import org.apache.xmlbeans.impl.util.Base64;
-import sun.reflect.misc.MethodUtil;
+
+import com.alibaba.fastjson.JSONObject;
+import com.virgil.util.FileUtil;
+import com.virgil.util.LogUtil;
+import ctrip.business.enumclass.BasicBusinessTypeEnum;
 
 public class Test {
     private static final int TEST_ENCRYPT_BASE64_DECODE = 0;
@@ -25,11 +23,17 @@ public class Test {
     private static final int TEST_ENCODEURL = TEST_REFECT + 1;
 
     public static void main(String[] args) {
-        Test thisCl = new Test();
-        thisCl.testLamabada();
+//        Test thisCl = new Test();
+//        thisCl.testLamabada();
 //        LogUtil.printlnInConsle(System.currentTimeMillis());
 //        int test_code = TEST_REFECT;
 //        thisCl.processTest(test_code);
+        try{
+            throw new RuntimeException();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        LogUtil.printlnInConsle("Excuted2");
     }
 
     private void processTest(int test_code) {

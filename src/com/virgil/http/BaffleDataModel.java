@@ -1,13 +1,13 @@
 package com.virgil.http;
 
 public class BaffleDataModel implements Cloneable {
-	public int dataId = 0;// 数据主键
-	public String serviceName = "";// 服务名称
-	public String dataDescription = "";// 挡板数据Title
-	public String createrID = "";// 创建者ID
-	public int privacy = 0;// 挡板权限
-	public long timecreate = 0l;// 创建时间
-	public long timelastupdate = 0l;// 更新时间
+	public int dataId = 0;// 鏁版嵁涓婚敭
+	public String serviceName = "";// 鏈嶅姟鍚嶇О
+	public String dataDescription = "";// 鎸℃澘鏁版嵁Title
+	public String createrID = "";// 鍒涘缓鑰匢D
+	public int privacy = 0;// 鎸℃澘鏉冮檺
+	public long timecreate = 0l;// 鍒涘缓鏃堕棿
+	public long timelastupdate = 0l;// 鏇存柊鏃堕棿
 
 	public BaffleDataModel() {
 

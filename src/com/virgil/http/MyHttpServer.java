@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.sql.Connection;
@@ -22,7 +21,7 @@ import com.virgil.util.StringUtil;
 public class MyHttpServer {
 	public static void httpserverService() throws IOException {
 		HttpServerProvider provider = HttpServerProvider.provider();
-		HttpServer httpserver = provider.createHttpServer(new InetSocketAddress(8001), 100);// ����˿�,��ͬʱ��
+		HttpServer httpserver = provider.createHttpServer(new InetSocketAddress(8002), 100);// ����˿�,��ͬʱ��
 
 		httpserver.createContext("/", new MyHttpHandler());
 		httpserver.setExecutor(null);
@@ -61,7 +60,7 @@ public class MyHttpServer {
 	}
 
 	public static String getQueryParamByattr(String query, String attr) {
-		String spiltSym = "\\=";
+		String spiltSym = "=";
 		String param = null;
 		String[] result = query.split(spiltSym);
 		if (result != null && result.length >= 2) {
@@ -75,8 +74,8 @@ public class MyHttpServer {
 	public static String processHttprseponse(URI uri) {
 
 		String path = uri.getPath();
-		String uid = getQueryParamByattr(uri.getQuery(), "userid");
-		String content = null;
+		String uid = getQueryParamByattr(uri.getQuery(), "groupid");
+		StringBuilder content = new StringBuilder();
 		if (!StringUtil.emptyOrNull(path)) {
 			path = path.replace("/", ".");
 			if (path.startsWith(".")) {
@@ -86,13 +85,13 @@ public class MyHttpServer {
 			try {
 				Connection conn = DBUtilsHelper.getConnection();
 				PreparedStatement ps;
-				String sql = "select a.user_id,c.* from user_select_data as a left join data_property as c on a.data_id=c.data_id  where a.user_id='" + uid + "' and c.service_name='" + path + "'";
+				String sql = "select user_name from user_tb where group_id=\'"+uid+"\'";
 				ps = conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();
 				while (rs.next()) {
-					content = rs.getString("data_content");
-					if (!StringUtil.emptyOrNull(content)) {
-						break;
+					String value=rs.getString("user_name");
+					if(!StringUtil.emptyOrNull(value)){
+						content.append(value + "\n");
 					}
 				}
 			} catch (SQLException e) {
@@ -100,7 +99,7 @@ public class MyHttpServer {
 			}
 
 		}
-		return content;
+		return content.toString();
 	}
 
 	public static void querydataFromDB() {
