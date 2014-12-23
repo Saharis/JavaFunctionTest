@@ -1,13 +1,24 @@
 package com.virgil.test;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.xmlbeans.impl.util.Base64;
 
@@ -28,14 +39,102 @@ public class Test {
 //        LogUtil.printlnInConsle(System.currentTimeMillis());
 //        int test_code = TEST_REFECT;
 //        thisCl.processTest(test_code);
-        try{
-            throw new RuntimeException();
-        }catch (Exception e){
+//        try{
+//            throw new RuntimeException();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        LogUtil.printlnInConsle(~10);
+//
+//        getAPKSigInfo("/Users/liuwujing/Downloads/root_explorer_3.2.apk");
+//        LogUtil.printlnInConsle(Integer.toBinaryString(9));
+//        System.out.println("".replaceAll(".{4}(?!$)", "$0 "));
+//        LogUtil.printlnInConsle(String.format("%,c","4392268300009140"));
+//        binarytest();
+//        String a="1234567";
+//        a.contains("12");
+//        ;a.regionMatches(0,"a12sd12fas1",5,2);
+//        String url="file:////webapp/topshop/webapp/index.html#payshop?shoptype=2&restaurantid=20000248&type=1&precent=20&from_native_page=1&isfrompayment=1";
+//        int length="webapp/".length();
+//        int index=url.indexOf("webapp/");
+//        int lastIndex=url.lastIndexOf("webapp/");
+//        LogUtil.printlnInConsle("length-"+length+";index-"+index+";lastIndex-"+lastIndex);
+//        File file =new File("/Users/liuwujing/Downloads/");
+//        getFileNameList("/Users/liuwujing/Downloads/","");
+        //正则表达式
+//        Pattern p= Pattern.compile("^PAY_LOG_TAG.*");
+//        Matcher m=p.matcher("PAY_LOG_TAG_2014-12-10-11.txt");
+//        LogUtil.printlnInConsle(m.matches()+"");
+        String s=" 1 2 3 ";
+        LogUtil.printlnInConsle(s);
+        LogUtil.printlnInConsle(s.trim());
+    }
+    private static String[] getFileNameList(String folderPath,final String fileNameMatcher){
+        File file =new File(folderPath);
+        FilenameFilter filenameFilter=new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                Pattern p= Pattern.compile(fileNameMatcher);
+                Matcher m=p.matcher(name);
+                return m.matches();
+            }
+        };
+        return file.list(filenameFilter);
+    }
+    public static String getAPKSigInfo(String filePath) {
+        String subjectDN = "";
+        String issuerDN = "";
+        String publicKey = "";
+        try {
+            JarFile jarFile = new JarFile(filePath);
+            JarEntry jarEntry = jarFile.getJarEntry("AndroidManifest.xml");
+            if (jarEntry != null) {
+                byte[] readBuffer = new byte[8192];
+                InputStream is = new BufferedInputStream(jarFile.getInputStream(jarEntry));
+                while (is.read(readBuffer, 0, readBuffer.length) != -1) {
+                    // not using
+                }
+                Certificate[] certs = jarEntry.getCertificates();
+                if(certs!=null && certs.length>0)
+                {
+                    //获取证书
+                    X509Certificate x509cert = (X509Certificate) certs[0];
+                    //获取证书发行者
+                    issuerDN = x509cert.getIssuerDN().toString();
+                    //获取证书所有者
+                    subjectDN = x509cert.getSubjectDN().toString();
+                    //证书key
+                    publicKey = x509cert.getPublicKey().toString();
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        LogUtil.printlnInConsle("Excuted2");
+        return null;
     }
+private static void binarytest(){
 
+    String binary[] = {"0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"};
+    int a = 3; // 0 + 2 + 1 or 0011 in binary
+    int b = 6; // 4 + 2 + 0 or 0110 in binary
+    int c = a | b;
+    int d = a & b;
+    int e = a ^ b;
+    int f = (~a & b) | (a & ~b);
+    int g = ~a & 0x0f;
+
+
+    System.out.println(" a = " + binary[a]);
+    System.out.println(" b = " + binary[b]);
+    System.out.println(" a|b = " + binary[c]);
+    System.out.println(" a&b = " + binary[d]);
+    System.out.println(" a^b = " + binary[e]);
+    System.out.println("~a&b|a&~b = " + binary[f]);
+    System.out.println(" ~a = " + binary[g]);
+}
     private void processTest(int test_code) {
         switch (test_code) {
             case TEST_ENCRYPT_BASE64_DECODE:

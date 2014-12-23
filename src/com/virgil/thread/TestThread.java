@@ -1,9 +1,9 @@
 package com.virgil.thread;
 
-import com.virgil.util.LogUtil;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import com.virgil.util.LogUtil;
 
 /**
  * Created by liuwujing on 14/11/20.
@@ -24,7 +24,7 @@ public class TestThread {
         new Thread(a).start();
         new Thread(a).start();
         new Thread(a).start();
-        ExecutorService ex= Executors.newFixedThreadPool(2);
+        ExecutorService ex= Executors.newScheduledThreadPool(1);
         ex.execute(new Thread(a));
         ex.execute(new Thread(a));
         ex.execute(new Thread(a));
