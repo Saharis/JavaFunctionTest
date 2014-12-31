@@ -23,6 +23,11 @@ import java.util.regex.Pattern;
 import org.apache.xmlbeans.impl.util.Base64;
 
 import com.alibaba.fastjson.JSONObject;
+import com.virgil.mail.FunctionEntrance;
+import com.virgil.reflect.AbstractFather;
+import com.virgil.reflect.InterfaceFather;
+import com.virgil.reflect.NormalFather;
+import com.virgil.reflect.Son;
 import com.virgil.util.FileUtil;
 import com.virgil.util.LogUtil;
 import ctrip.business.enumclass.BasicBusinessTypeEnum;
@@ -32,7 +37,7 @@ public class Test {
     private static final int TEST_ENCRYPT_BASE64_ENCODE = TEST_ENCRYPT_BASE64_DECODE + 1;
     private static final int TEST_REFECT = TEST_ENCRYPT_BASE64_ENCODE + 1;
     private static final int TEST_ENCODEURL = TEST_REFECT + 1;
-
+private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
     public static void main(String[] args) {
 //        Test thisCl = new Test();
 //        thisCl.testLamabada();
@@ -65,9 +70,34 @@ public class Test {
 //        Pattern p= Pattern.compile("^PAY_LOG_TAG.*");
 //        Matcher m=p.matcher("PAY_LOG_TAG_2014-12-10-11.txt");
 //        LogUtil.printlnInConsle(m.matches()+"");
-        String s=" 1 2 3 ";
-        LogUtil.printlnInConsle(s);
-        LogUtil.printlnInConsle(s.trim());
+//        String s=" 1 2 3 ";
+//        LogUtil.printlnInConsle(s);
+//        LogUtil.printlnInConsle(s.trim());
+//        Test s=new Test();
+        Son son=new Son();
+        try {
+            Field field=son.getClass().getDeclaredFields()[0];
+            field.setAccessible(true);
+            Class type=field.getType();
+            field.getClass().getSuperclass().getDeclaredFields();
+            if(NormalFather.class.isAssignableFrom(type)){
+                NormalFather nf=(NormalFather)field.get(son);
+                LogUtil.printInWindow(nf.getClass().getDeclaredFields().toString());
+            }
+            if(AbstractFather.class.isAssignableFrom(type)){
+                AbstractFather af=(AbstractFather)field.get(son);
+                LogUtil.printInWindow(af.getClass().getDeclaredFields().toString());
+            }
+
+            if(InterfaceFather.class.isAssignableFrom(type)){
+                InterfaceFather ifa=(InterfaceFather)field.get(son);                ifa.getClass().getInterfaces()[0].getDeclaredFields();
+                LogUtil.printInWindow(ifa.getClass().getDeclaredFields().toString());
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+//        ReflectUtil.getAllFieldsWithClassName(s.getClass().getName());
     }
     private static String[] getFileNameList(String folderPath,final String fileNameMatcher){
         File file =new File(folderPath);

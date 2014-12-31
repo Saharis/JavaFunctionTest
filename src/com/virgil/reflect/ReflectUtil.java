@@ -12,7 +12,7 @@ public class ReflectUtil {
             Class reconClass=Class.forName(className);
 
             if(reconClass!=null){
-                Field[] fiedls=reconClass.getFields();
+                Field[] fiedls=reconClass.getDeclaredFields();
                 return fiedls;
             }
         } catch (ClassNotFoundException e) {
