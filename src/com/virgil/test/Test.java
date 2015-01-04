@@ -13,6 +13,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.jar.JarEntry;
@@ -24,10 +25,6 @@ import org.apache.xmlbeans.impl.util.Base64;
 
 import com.alibaba.fastjson.JSONObject;
 import com.virgil.mail.FunctionEntrance;
-import com.virgil.reflect.AbstractFather;
-import com.virgil.reflect.InterfaceFather;
-import com.virgil.reflect.NormalFather;
-import com.virgil.reflect.Son;
 import com.virgil.util.FileUtil;
 import com.virgil.util.LogUtil;
 import ctrip.business.enumclass.BasicBusinessTypeEnum;
@@ -74,29 +71,33 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //        LogUtil.printlnInConsle(s);
 //        LogUtil.printlnInConsle(s.trim());
 //        Test s=new Test();
-        Son son=new Son();
-        try {
-            Field field=son.getClass().getDeclaredFields()[0];
-            field.setAccessible(true);
-            Class type=field.getType();
-            field.getClass().getSuperclass().getDeclaredFields();
-            if(NormalFather.class.isAssignableFrom(type)){
-                NormalFather nf=(NormalFather)field.get(son);
-                LogUtil.printInWindow(nf.getClass().getDeclaredFields().toString());
-            }
-            if(AbstractFather.class.isAssignableFrom(type)){
-                AbstractFather af=(AbstractFather)field.get(son);
-                LogUtil.printInWindow(af.getClass().getDeclaredFields().toString());
-            }
-
-            if(InterfaceFather.class.isAssignableFrom(type)){
-                InterfaceFather ifa=(InterfaceFather)field.get(son);                ifa.getClass().getInterfaces()[0].getDeclaredFields();
-                LogUtil.printInWindow(ifa.getClass().getDeclaredFields().toString());
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
+//        Son son=new Son();
+//        try {
+//            Field field=son.getClass().getDeclaredFields()[0];
+//            field.setAccessible(true);
+//            Class type=field.getType();
+//            field.getClass().getSuperclass().getDeclaredFields();
+//            if(NormalFather.class.isAssignableFrom(type)){
+//                NormalFather nf=(NormalFather)field.get(son);
+//                LogUtil.printInWindow(nf.getClass().getDeclaredFields().toString());
+//            }
+//            if(AbstractFather.class.isAssignableFrom(type)){
+//                AbstractFather af=(AbstractFather)field.get(son);
+//                LogUtil.printInWindow(af.getClass().getDeclaredFields().toString());
+//            }
+//
+//            if(InterfaceFather.class.isAssignableFrom(type)){
+//                InterfaceFather ifa=(InterfaceFather)field.get(son);                ifa.getClass().getInterfaces()[0].getDeclaredFields();
+//                LogUtil.printInWindow(ifa.getClass().getDeclaredFields().toString());
+//            }
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+        String str="JAVA";
+        StringBuilder sb=new StringBuilder("JAVA");
+        StringBuffer sf=new StringBuffer("JAVA");
+        LogUtil.printlnInConsle(String.join("-\n",ZoneId.getAvailableZoneIds()));
+//        str.join()
 //        ReflectUtil.getAllFieldsWithClassName(s.getClass().getName());
     }
     private static String[] getFileNameList(String folderPath,final String fileNameMatcher){
