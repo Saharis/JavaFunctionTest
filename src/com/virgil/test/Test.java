@@ -13,7 +13,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.jar.JarEntry;
@@ -25,6 +24,7 @@ import org.apache.xmlbeans.impl.util.Base64;
 
 import com.alibaba.fastjson.JSONObject;
 import com.virgil.mail.FunctionEntrance;
+import com.virgil.reflect.Son;
 import com.virgil.util.FileUtil;
 import com.virgil.util.LogUtil;
 import ctrip.business.enumclass.BasicBusinessTypeEnum;
@@ -34,6 +34,8 @@ public class Test {
     private static final int TEST_ENCRYPT_BASE64_ENCODE = TEST_ENCRYPT_BASE64_DECODE + 1;
     private static final int TEST_REFECT = TEST_ENCRYPT_BASE64_ENCODE + 1;
     private static final int TEST_ENCODEURL = TEST_REFECT + 1;
+    private static String strST="static";
+    private String str="norma";
 private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
     public static void main(String[] args) {
 //        Test thisCl = new Test();
@@ -70,35 +72,60 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //        String s=" 1 2 3 ";
 //        LogUtil.printlnInConsle(s);
 //        LogUtil.printlnInConsle(s.trim());
-//        Test s=new Test();
-//        Son son=new Son();
+        Test s=new Test();
+        Son son=new Son();
+        Class a=Test.class;
+        try {
+            Field strFN=s.getClass().getDeclaredField("strST");
+            strFN.setAccessible(true);
+            LogUtil.printlnInConsle("strFN.get(s)="+strFN.get(s));
+            Field strFS=a.getDeclaredField("strST");
+            strFS.setAccessible(true);
+            LogUtil.printlnInConsle("strFS.get(a)="+strFS.get(a));
+
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }catch (IllegalAccessException e){
+
+        }
 //        try {
 //            Field field=son.getClass().getDeclaredFields()[0];
 //            field.setAccessible(true);
 //            Class type=field.getType();
-//            field.getClass().getSuperclass().getDeclaredFields();
+//            AbstractFather af1=(AbstractFather)field.get(son);
+//            Field[] fields=af1.getClass().getSuperclass().getDeclaredFields();
+//            fields[0].setAccessible(true);
+//            fields[0].get(af1);
 //            if(NormalFather.class.isAssignableFrom(type)){
 //                NormalFather nf=(NormalFather)field.get(son);
-//                LogUtil.printInWindow(nf.getClass().getDeclaredFields().toString());
+//                LogUtil.printlnInConsle(nf.getClass().getDeclaredFields().toString());
 //            }
 //            if(AbstractFather.class.isAssignableFrom(type)){
 //                AbstractFather af=(AbstractFather)field.get(son);
-//                LogUtil.printInWindow(af.getClass().getDeclaredFields().toString());
+//                LogUtil.printlnInConsle(af.getClass().getDeclaredFields().toString());
 //            }
 //
 //            if(InterfaceFather.class.isAssignableFrom(type)){
 //                InterfaceFather ifa=(InterfaceFather)field.get(son);                ifa.getClass().getInterfaces()[0].getDeclaredFields();
-//                LogUtil.printInWindow(ifa.getClass().getDeclaredFields().toString());
+//                LogUtil.printlnInConsle(ifa.getClass().getDeclaredFields().toString());
 //            }
 //        } catch (IllegalAccessException e) {
 //            e.printStackTrace();
 //        }
-        String str="JAVA";
-        StringBuilder sb=new StringBuilder("JAVA");
-        StringBuffer sf=new StringBuffer("JAVA");
-        LogUtil.printlnInConsle(String.join("-\n",ZoneId.getAvailableZoneIds()));
+//        String str="JAVA";
+//        StringBuilder sb=new StringBuilder("JAVA");
+//        StringBuffer sf=new StringBuffer("JAVA");
+//        LogUtil.printlnInConsle(String.join("-\n", ZoneId.getAvailableZoneIds()));
+//        ArrayList<NormalFather> list=new ArrayList<NormalFather>();
+//        NormalFather nf=new NormalFather();
+//        AbstractFather af=nf;
+//        nf=(NormalFather)af;
 //        str.join()
 //        ReflectUtil.getAllFieldsWithClassName(s.getClass().getName());
+//        String response="ctrip.business.other.OtherPasswordChangeResponse";
+//        int lastIndext=response.lastIndexOf("Response");
+//        String request=response.substring(0,lastIndext)+"Request";
+//        LogUtil.printlnInConsle(request);
     }
     private static String[] getFileNameList(String folderPath,final String fileNameMatcher){
         File file =new File(folderPath);
@@ -112,6 +139,7 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
         };
         return file.list(filenameFilter);
     }
+
     public static String getAPKSigInfo(String filePath) {
         String subjectDN = "";
         String issuerDN = "";
@@ -230,12 +258,16 @@ private static void binarytest(){
 //        a.forEach(System.out::println);
     }
 
+    private static void teststai(){
+        LogUtil.printlnInConsle(Test.strST);
+    }
     /**
      * Base64 decode this content
      *
      * @param code
      */
     private String base64Decode(String code) {
+        this.testLamabada();
         String result = null;
         if (code != null && !"".equalsIgnoreCase(code)) {
             result = new String(Base64.decode(code.getBytes()));
