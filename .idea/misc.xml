@@ -41,7 +41,11 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+<<<<<<< HEAD
     <output url="file://$PROJECT_DIR$/../../Cache/JavaFunctionTest" />
+=======
+    <output url="file://$PROJECT_DIR$/../../Temp/Generated/JavaFunctionTest" />
+>>>>>>> aa2be6559f4b9608a893ede29803d5dc0b0ff6a8
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
