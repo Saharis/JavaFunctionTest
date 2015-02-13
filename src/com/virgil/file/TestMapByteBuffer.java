@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Created by liuwujing on 14/12/10.
  */
 public class TestMapByteBuffer {
-    public static String filePath = "/Users/liuwujing/Downloads/PAY_LOG_TAG_2014-12-10-11.txt";
+    public static String filePath = "/Users/liuwujing/Documents/SVN/Android/BRANCH_CTRIP_6.3_PAY2/Ctrip_Wireless_View/src/ctrip/base/logical/component/commonview/pay/CardBinFragment.java";
 
     public static void main(String[] args) throws Exception {
         readWithScanner(filePath);

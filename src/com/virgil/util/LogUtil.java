@@ -16,4 +16,7 @@ public class LogUtil {
     public static void printInWindow(String info){
 
     }
+    public static void logErrorInConsle(String error){
+        printlnInConsle("ERROR==="+error);
+    }
 }

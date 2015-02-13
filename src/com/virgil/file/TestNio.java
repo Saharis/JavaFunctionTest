@@ -6,6 +6,8 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+import com.virgil.util.StringUtil;
+
 public class TestNio {
 
 
@@ -17,7 +19,7 @@ public class TestNio {
 
         int bufSize = 100;
         String pathRead="/Users/liuwujing/Downloads/bigfile.txt";
-        String pathWrite="/Users/liuwujing/Downloads/log1.txt";
+        String pathWrite="/Users/liuwujing/Downloads/log2.txt";
         File fin = new File(pathRead);
         File fout = new File(pathWrite);
 
@@ -31,8 +33,25 @@ public class TestNio {
         readFileByLine(bufSize, fcin, rBuffer, fcout, wBuffer);
 
         System.out.print("OK!!!");
+        String path="/Users/liuwujing/Documents/SVN/Android/BRANCH_CTRIP_6.3_PAY2/Ctrip_Wireless_View/src/ctrip/base/logical/component/commonview/pay";
     }
+private static void readCircle(String path){
+    if(!StringUtil.emptyOrNull(path)){
+        File file=new File(path);
+        File[] fileList=file.listFiles();
+        for(File tempFile:fileList){
+            if(tempFile.isDirectory()){
+                readCircle(tempFile.getPath());
+            }else{
+                if(tempFile.getName().endsWith(".java")){
 
+                }else if(tempFile.getName().endsWith(".xml")){
+
+                }
+            }
+        }
+    }
+}
     public static void readFileByLine(int bufSize, FileChannel fcin, ByteBuffer rBuffer, FileChannel fcout, ByteBuffer wBuffer){
         String enterStr = "\n";
         try{
