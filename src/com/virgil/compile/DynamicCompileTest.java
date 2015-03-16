@@ -29,8 +29,8 @@ public class DynamicCompileTest {
 //			out.close();
 			File fil2e = new File(classDir, "FlightSeatEntityModel.java");
 			// 编译
-			int result=com.sun.tools.javac.Main.compile(new String[] { "-d", classDir,file.getName()});// JAVA_HOME/jdk/lib/tools.jar
-			System.out.println(result);
+//			int result=com.sun.tools.javac.Main.compile(new String[] { "-d", classDir,file.getName()});// JAVA_HOME/jdk/lib/tools.jar
+//			System.out.println(result);
 //			URL url = new URL("file:/" + classDir + File.separator);
 //			// 动态加载/执行
 //			URLClassLoader loader = new URLClassLoader(new URL[] { url });

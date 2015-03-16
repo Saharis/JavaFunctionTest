@@ -11,7 +11,7 @@ public class DynmicCompile {
 	public static void test(){
 		String filename = "FlightPassengerSeatModel.java";
 	    String[] args = new String[] {FOLD_PATH_1+filename };
-	    int status = com.sun.tools.javac.Main.compile(args);
-	    System.out.println("编译结果是"+status);
+//	    int status = com.sun.tools.javac.Main.compile(args);
+//	    System.out.println("编译结果是"+status);
 	}
 }

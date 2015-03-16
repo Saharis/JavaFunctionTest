@@ -15,8 +15,8 @@ public class Test3 {
 		// Load
 		try {
 			String[] arguments = new String[] { "-d", FOLD_PATH_1, "FlightPassengerSeatModel.java" };
-			int result = com.sun.tools.javac.Main.compile(arguments);
-			System.out.println("result是"+result);
+//			int result = com.sun.tools.javac.Main.compile(arguments);
+//			System.out.println("result是"+result);
 			URL classpath = new URL(FOLD_PATH_1);
 
 			URLClassLoader classLoader = new URLClassLoader(new URL[] { classpath });
