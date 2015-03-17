@@ -24,7 +24,6 @@ import org.apache.xmlbeans.impl.util.Base64;
 
 import com.alibaba.fastjson.JSONObject;
 import com.virgil.mail.FunctionEntrance;
-import com.virgil.reflect.Son;
 import com.virgil.util.FileUtil;
 import com.virgil.util.LogUtil;
 import ctrip.business.enumclass.BasicBusinessTypeEnum;
@@ -72,22 +71,30 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //        String s=" 1 2 3 ";
 //        LogUtil.printlnInConsle(s);
 //        LogUtil.printlnInConsle(s.trim());
-        Test s=new Test();
-        Son son=new Son();
-        Class a=Test.class;
+        String teturl="file://webapp/hhtravel/index.html#order_complete?title=【世界新7大奇景】墨西哥+古巴11天8晚·玛雅文明遗迹+红色传奇+灿烂加勒比";
         try {
-            Field strFN=s.getClass().getDeclaredField("strST");
-            strFN.setAccessible(true);
-            LogUtil.printlnInConsle("strFN.get(s)="+strFN.get(s));
-            Field strFS=a.getDeclaredField("strST");
-            strFS.setAccessible(true);
-            LogUtil.printlnInConsle("strFS.get(a)="+strFS.get(a));
+            LogUtil.printlnInConsle("or="+teturl);
 
-        } catch (NoSuchFieldException e) {
+            LogUtil.printlnInConsle("re="+URLDecoder.decode(teturl, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }catch (IllegalAccessException e){
-
         }
+//        Test s=new Test();
+//        Son son=new Son();
+//        Class a=Test.class;
+//        try {
+//            Field strFN=s.getClass().getDeclaredField("strST");
+//            strFN.setAccessible(true);
+//            LogUtil.printlnInConsle("strFN.get(s)="+strFN.get(s));
+//            Field strFS=a.getDeclaredField("strST");
+//            strFS.setAccessible(true);
+//            LogUtil.printlnInConsle("strFS.get(a)="+strFS.get(a));
+//
+//        } catch (NoSuchFieldException e) {
+//            e.printStackTrace();
+//        }catch (IllegalAccessException e){
+//
+//        }
 //        try {
 //            Field field=son.getClass().getDeclaredFields()[0];
 //            field.setAccessible(true);

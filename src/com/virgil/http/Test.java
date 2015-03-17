@@ -14,18 +14,11 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * @project SimpleHttpServer
- * @author sunnylocus
- * @vresion 1.0 2009-9-2
- * @description ������
- */
 public class Test {
 	public static final int SEND_TIMES = 1;
 
 	public static void main(String[] args) {
 		ExecutorService exec = Executors.newCachedThreadPool();
-		// ���Բ�����MyHttpServer��Ӱ��
 		for (int i = 0; i < SEND_TIMES; i++) {
 			Runnable run = new Runnable() {
 				public void run() {
@@ -38,7 +31,7 @@ public class Test {
 			};
 			exec.execute(run);
 		}
-		exec.shutdown();// �ر��̳߳�
+		exec.shutdown();
 	}
 
 	public static void startWork() throws IOException {
@@ -52,7 +45,6 @@ public class Test {
 		urlConn.setDoInput(true);
 		urlConn.setRequestMethod("GET");
 		urlConn.setRequestProperty("Cookie", "");
-		// �������ݰ�
 		String teststr = "test message from virgil";
 		OutputStream out = urlConn.getOutputStream();
 		out.write(teststr.getBytes());
