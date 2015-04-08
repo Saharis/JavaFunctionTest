@@ -18,7 +18,6 @@ import java.util.jar.JarFile;
 
 import com.virgil.util.StringUtil;
 
-import ctrip.business.handle.annotation.SerializeField;
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
@@ -114,32 +113,32 @@ public class DealWithAndroidDel {
 	}
 
 	private static StringBuilder compareAnnotion(Field field_a, Field field_b,StringBuilder string_content) {
-		SerializeField annotation_a = field_a.getAnnotation(SerializeField.class);
-		SerializeField annotation_b = field_b.getAnnotation(SerializeField.class);
-		if (!annotation_a.type().equals(annotation_b.type())) {
-			string_content.append("type不一致");
-		}
-		if (annotation_a.length() != annotation_b.length()) {
-			string_content.append("length不一致");
-		}
-		if (annotation_a.index() != (annotation_b.index())) {
-			string_content.append("index不一致");
-		}
-		if (annotation_a.require() != (annotation_b.require())) {
-			string_content.append("requre不一致");
-		}
-		if (annotation_a.isPriceField() != (annotation_b.isPriceField())) {
-			string_content.append("isPriceField不一致");
-		}
-		if (!annotation_a.serverType().equals(annotation_b.serverType())) {
-			string_content.append("serverType不一致");
-		}
-		if (!annotation_a.metadata().equals(annotation_b.metadata())) {
-			string_content.append("metadata不一致");
-		}
-		if (!annotation_a.format().equals(annotation_b.format())) {
-			string_content.append("format不一致");
-		}
+//		SerializeField annotation_a = field_a.getAnnotation(SerializeField.class);
+//		SerializeField annotation_b = field_b.getAnnotation(SerializeField.class);
+//		if (!annotation_a.type().equals(annotation_b.type())) {
+//			string_content.append("type不一致");
+//		}
+//		if (annotation_a.length() != annotation_b.length()) {
+//			string_content.append("length不一致");
+//		}
+//		if (annotation_a.index() != (annotation_b.index())) {
+//			string_content.append("index不一致");
+//		}
+//		if (annotation_a.require() != (annotation_b.require())) {
+//			string_content.append("requre不一致");
+//		}
+//		if (annotation_a.isPriceField() != (annotation_b.isPriceField())) {
+//			string_content.append("isPriceField不一致");
+//		}
+//		if (!annotation_a.serverType().equals(annotation_b.serverType())) {
+//			string_content.append("serverType不一致");
+//		}
+//		if (!annotation_a.metadata().equals(annotation_b.metadata())) {
+//			string_content.append("metadata不一致");
+//		}
+//		if (!annotation_a.format().equals(annotation_b.format())) {
+//			string_content.append("format不一致");
+//		}
 		StringBuilder temp=new StringBuilder();
 		if(!StringUtil.emptyOrNull(string_content.toString())){
 			temp.append("Annotation不一致：\r\n 字段"+field_a.getName()+"：");

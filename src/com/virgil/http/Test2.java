@@ -28,11 +28,11 @@ public class Test2 {
         HttpConnectionParams.setSoTimeout(localBasicHttpParams, 30000);
         HttpConnectionParams.setSocketBufferSize(localBasicHttpParams, 8192);
         HttpClientParams.setRedirecting(localBasicHttpParams, true);
-        SSLSessionCache localSSLSessionCache = paramContext == null ? null : new SSLSessionCache(paramContext);
+//        SSLSessionCache localSSLSessionCache = paramContext == null ? null : new SSLSessionCache(paramContext);
         HttpProtocolParams.setUserAgent(localBasicHttpParams, paramString);
         SchemeRegistry localSchemeRegistry = new SchemeRegistry();
         localSchemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-        localSchemeRegistry.register(new Scheme("https", SSLCertificateSocketFactory.getHttpSocketFactory(30000, localSSLSessionCache), 443));
+//        localSchemeRegistry.register(new Scheme("https", SSLCertificateSocketFactory.getHttpSocketFactory(30000, localSSLSessionCache), 443));
         ThreadSafeClientConnManager localThreadSafeClientConnManager = new ThreadSafeClientConnManager(localBasicHttpParams, localSchemeRegistry);
         ConnManagerParams.setTimeout(localBasicHttpParams, 60000L);
         ConnPerRouteBean localConnPerRouteBean = new ConnPerRouteBean(10);

@@ -6,9 +6,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.cert.Certificate;
@@ -26,7 +23,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.virgil.mail.FunctionEntrance;
 import com.virgil.util.FileUtil;
 import com.virgil.util.LogUtil;
-import ctrip.business.enumclass.BasicBusinessTypeEnum;
+import com.virgil.util.StringUtil;
 
 public class Test {
     private static final int TEST_ENCRYPT_BASE64_DECODE = 0;
@@ -71,14 +68,12 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //        String s=" 1 2 3 ";
 //        LogUtil.printlnInConsle(s);
 //        LogUtil.printlnInConsle(s.trim());
-        String teturl="file://webapp/hhtravel/index.html#order_complete?title=【世界新7大奇景】墨西哥+古巴11天8晚·玛雅文明遗迹+红色传奇+灿烂加勒比";
-        try {
-            LogUtil.printlnInConsle("or="+teturl);
-
-            LogUtil.printlnInConsle("re="+URLDecoder.decode(teturl, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        String urlsubFix="file://webapp/tuan/index.html#booking.success!1112996";
+//        if (urlsubFix.contains("#")) {
+//            urlsubFix = "/index.html" +urlsubFix.substring(urlsubFix.indexOf("#"), urlsubFix.length());
+//        }
+//        String teturl="file
+        LogUtil.printlnInConsle(buildURL("file://webapp/tuan/index.html#booking.success!1112996"));
 //        Test s=new Test();
 //        Son son=new Son();
 //        Class a=Test.class;
@@ -133,6 +128,29 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //        int lastIndext=response.lastIndexOf("Response");
 //        String request=response.substring(0,lastIndext)+"Request";
 //        LogUtil.printlnInConsle(request);
+    }
+
+    public static String buildURL(String url) {
+        String finalPath = null;
+        if (!StringUtil.emptyOrNull(url)) {
+            //下面的逻辑，例如：prefix/webapp/BU/content#subfix
+            int prefixLength = "webapp/".length();
+            int prefixPosition = url.indexOf("webapp/");
+            if (prefixLength >= 0 && prefixPosition >= 0) {
+                int lastPOIndex = url.substring(prefixLength + prefixPosition).indexOf("/");
+                //将路径中的"webapp"替换为本地资源路径
+                String path = url.substring(prefixLength + prefixPosition, prefixLength + prefixPosition + lastPOIndex);
+                String urlsubFix = url.substring(prefixLength + prefixPosition + lastPOIndex, url.length());
+                if (urlsubFix.contains("#")) {
+                    urlsubFix = "/index.html" +urlsubFix.substring(urlsubFix.indexOf("#"), urlsubFix.length());
+                }
+                finalPath = "file:///data/data/ctrip.android.view/app_ctripwebapp" + path +  urlsubFix;
+            } else {
+                return null;
+            }
+        }
+
+        return finalPath;
     }
     private static String[] getFileNameList(String folderPath,final String fileNameMatcher){
         File file =new File(folderPath);
@@ -221,26 +239,26 @@ private static void binarytest(){
             case TEST_ENCRYPT_BASE64_ENCODE:
                 break;
             case TEST_REFECT:
-                Field[] fields = BasicBusinessTypeEnum.class.getFields();
-
-                try {
-                    Class enumClass = fields[10].getDeclaringClass();
-                    enumClass.getMethods();
-                    Method method_GetValue = enumClass.getMethod("getValue", null);
-                    int value = (int) method_GetValue.invoke(BasicBusinessTypeEnum.valueOf(fields[10].getName()));
-                    LogUtil.printlnInConsle("fields[0].getName() is:" + fields[10].getName());
-                    LogUtil.printlnInConsle("fields[0].getType() is:" + fields[10].getType());
-                    LogUtil.printlnInConsle("value) is:" + value);
-
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-
-//                LogUtil.printlnInConsle("fields[0].getType() is:" + fields[0].getType());
+//                Field[] fields = BasicBusinessTypeEnum.class.getFields();
+//
+//                try {
+//                    Class enumClass = fields[10].getDeclaringClass();
+//                    enumClass.getMethods();
+//                    Method method_GetValue = enumClass.getMethod("getValue", null);
+//                    int value = (int) method_GetValue.invoke(BasicBusinessTypeEnum.valueOf(fields[10].getName()));
+//                    LogUtil.printlnInConsle("fields[0].getName() is:" + fields[10].getName());
+//                    LogUtil.printlnInConsle("fields[0].getType() is:" + fields[10].getType());
+//                    LogUtil.printlnInConsle("value) is:" + value);
+//
+//                } catch (IllegalAccessException e) {
+//                    e.printStackTrace();
+//                } catch (InvocationTargetException e) {
+//                    e.printStackTrace();
+//                } catch (NoSuchMethodException e) {
+//                    e.printStackTrace();
+//                }
+//
+////                LogUtil.printlnInConsle("fields[0].getType() is:" + fields[0].getType());
                 break;
             case TEST_ENCODEURL:
                 String extend = FileUtil.readFile("D:/1.txt");

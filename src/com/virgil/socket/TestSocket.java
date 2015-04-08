@@ -1,9 +1,17 @@
 package com.virgil.socket;
 
-import com.virgil.util.LogUtil;
-
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
+
+import com.virgil.util.LogUtil;
 
 /**
  * This class is used to test java socket
@@ -41,6 +49,14 @@ public class TestSocket {
             in.close();
             socket.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SecretKeySpec s=new SecretKeySpec("".getBytes(),"");
+        try {
+            Cipher localC=Cipher.getInstance("");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
             e.printStackTrace();
         }
     }
