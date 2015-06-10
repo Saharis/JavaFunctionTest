@@ -1,7 +1,18 @@
 package com.virgil.util;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Properties;
+
+import org.apache.http.util.TextUtils;
 
 public class FileUtil {
 
@@ -26,7 +37,29 @@ public class FileUtil {
             file.delete();
         }
     }
+    public static void deleteAllFile(String path) {
+        if (!TextUtils.isEmpty(path)) {
+            deleteAllFile(new File(path));
+        }
+    }
 
+    public static void deleteAllFile(File file) {
+        if (file != null) {
+            if (file.exists()) {
+                if (file.isFile()) {
+                    file.delete();
+                } else if (file.isDirectory()) {
+                    File[] sonList = file.listFiles();
+                    if (sonList != null && sonList.length > 0) {
+                        for (File sonPath : sonList) {
+                            deleteAllFile(sonPath);
+                        }
+                    }
+                    file.delete();
+                }
+            }
+        }
+    }
     /**
      * Write Data to File
      * @param data String
@@ -64,7 +97,7 @@ public class FileUtil {
      * @param fileName String
      * @return String
      */
-    public static String readFile(String fileName){
+    public static String readFileContent(String fileName){
         String str=null;
         BufferedReader reader=null;
         try {

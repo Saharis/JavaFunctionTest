@@ -9,9 +9,12 @@ import com.virgil.util.LogUtil;
  */
 public class TestMath {
     public static void main(String[] args) {
-        LogUtil.printlnInConsle(Math.sqrt(81)+"");
+//        LogUtil.printlnInConsle(Math.sqrt(81)+"");
 //        testMath();
-//        LogUtil.printlnInConsle(getRandomString(24));
+        int a=46;
+        float x=Float.valueOf(String.format("%1$.2f", a / 100.0f));
+        LogUtil.printlnInConsle(String.valueOf(x));
+        LogUtil.printlnInConsle(Math.round(x));
     }
 
     public static void testMath() {
@@ -22,6 +25,7 @@ public class TestMath {
     }
 
     private static void print(double num) {
+
         System.out.println("Math.floor(" + num + ")=" + Math.floor(num));
         System.out.println("Math.round(" + num + ")=" + Math.round(num));
         System.out.println("Math.ceil(" + num + ")=" + Math.ceil(num));

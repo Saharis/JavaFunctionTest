@@ -11,7 +11,9 @@ import java.net.URLEncoder;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.TimeZone;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
@@ -73,7 +75,13 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //            urlsubFix = "/index.html" +urlsubFix.substring(urlsubFix.indexOf("#"), urlsubFix.length());
 //        }
 //        String teturl="file
-        LogUtil.printlnInConsle(buildURL("file://webapp/tuan/index.html#booking.success!1112996"));
+        long a=987659876L;
+        int x=(int)a;
+        LogUtil.printlnInConsle(System.nanoTime());
+        LogUtil.printlnInConsle("x=" + x);
+//        new GregorianCalendar(123L);
+//        getCalendarByDateStr("2001-01-01");
+//        LogUtil.printlnInConsle(buildURL("file://webapp/tuan/index.html#booking.success!1112996"));
 //        Test s=new Test();
 //        Son son=new Son();
 //        Class a=Test.class;
@@ -219,6 +227,25 @@ private static void binarytest(){
     System.out.println("~a&b|a&~b = " + binary[f]);
     System.out.println(" ~a = " + binary[g]);
 }
+
+    public static Calendar getCalendarByDateStr(String dateStr)
+    {
+        if (StringUtil.emptyOrNull(dateStr) || dateStr.length() < 8) {
+            return null;
+        }
+        Calendar calendar = getLocalCalendar();
+        int year = Integer.valueOf(dateStr.substring(0, 4));
+        int month = Integer.valueOf(dateStr.substring(4, 6));
+        int day = Integer.valueOf(dateStr.substring(6, 8));
+        calendar.set(year, month - 1, day, 0, 0, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar;
+    }
+    public static Calendar getLocalCalendar()
+    {
+        Calendar localCalendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Shanghai"));
+        return localCalendar;
+    }
     private void processTest(int test_code) {
         switch (test_code) {
             case TEST_ENCRYPT_BASE64_DECODE:
@@ -261,8 +288,8 @@ private static void binarytest(){
 ////                LogUtil.printlnInConsle("fields[0].getType() is:" + fields[0].getType());
                 break;
             case TEST_ENCODEURL:
-                String extend = FileUtil.readFile("D:/1.txt");
-                System.out.println(encode(FileUtil.readFile("D:/1.txt")));
+                String extend = FileUtil.readFileContent("D:/1.txt");
+                System.out.println(encode(FileUtil.readFileContent("D:/1.txt")));
                 break;
             default:
                 LogUtil.printlnInConsle("Unrecoginze code");
