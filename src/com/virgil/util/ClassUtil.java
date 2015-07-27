@@ -16,7 +16,7 @@ import java.util.jar.JarFile;
  */
 public class ClassUtil {
     /**
-     * 获取某包下所有类
+     * 获取某包F下所有类
      * @param packageName 包名
      * @param isRecursion 是否遍历子包
      * @return 类的完整名称

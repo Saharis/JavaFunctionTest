@@ -19,6 +19,7 @@ import java.util.jar.JarFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.http.util.TextUtils;
 import org.apache.xmlbeans.impl.util.Base64;
 
 import com.alibaba.fastjson.JSONObject;
@@ -75,10 +76,10 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //            urlsubFix = "/index.html" +urlsubFix.substring(urlsubFix.indexOf("#"), urlsubFix.length());
 //        }
 //        String teturl="file
-        long a=987659876L;
-        int x=(int)a;
-        LogUtil.printlnInConsle(System.nanoTime());
-        LogUtil.printlnInConsle("x=" + x);
+//        long a=987659876L;
+//        int x=(int)a;
+//        LogUtil.printlnInConsle(System.nanoTime());
+//        LogUtil.printlnInConsle("x=" + x);
 //        new GregorianCalendar(123L);
 //        getCalendarByDateStr("2001-01-01");
 //        LogUtil.printlnInConsle(buildURL("file://webapp/tuan/index.html#booking.success!1112996"));
@@ -136,8 +137,26 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //        int lastIndext=response.lastIndexOf("Response");
 //        String request=response.substring(0,lastIndext)+"Request";
 //        LogUtil.printlnInConsle(request);
+//        String date1="20150617164248";
+//        String date2="20150617164255";
+//        DateTimeUtil.getCurrentDateTime("");
+//        LogUtil.printlnInConsle(DateTimeUtil.compareTwoDateTime(date1, date2));
+        makeFolderPathSafe("/Users/liuwujing/Documents/json.txt ");
     }
 
+    public static void makeFolderPathSafe(String filePath) {
+        if (!TextUtils.isEmpty(filePath)) {
+            String folderPath = filePath;
+            if (!filePath.endsWith("/")) {
+                int indexa = filePath.lastIndexOf("/");
+                folderPath = filePath.substring(0, indexa)+"/";
+            }
+            File file = new File(folderPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+        }
+    }
     public static String buildURL(String url) {
         String finalPath = null;
         if (!StringUtil.emptyOrNull(url)) {

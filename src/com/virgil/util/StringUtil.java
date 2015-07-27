@@ -1,5 +1,10 @@
 package com.virgil.util;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+
 public class StringUtil {
 
 	public static boolean emptyOrNull(String str) {
@@ -44,4 +49,57 @@ public class StringUtil {
     public static int toInt(String s) {
         return toInt(s,-1);
     }
+
+    /**
+     * 获取异常信息
+     *
+     * @param arg1 Throwable
+     * @return String
+     */
+    public static String getExceptionInfo(Throwable arg1) {
+        Writer writer = new StringWriter();
+        PrintWriter pw = new PrintWriter(writer);
+        // arg1.printStackTrace(pw);
+        arg1.getCause().printStackTrace(pw);
+        pw.close();
+
+        String[] errorInfo = writer.toString().split("\n\tat");
+        String error = "";
+        int length = errorInfo.length > 6 ? 6 : errorInfo.length;
+        for (int i = 0; i < length; i++) {
+            error = error + errorInfo[i] + "\n\tat";
+        }
+        return "异常内容：" + error;
+    }
+
+    /**
+     * 获取异常信息
+     * @param e Exception
+     * @return String
+     */
+    public static String getExceptionInfo(Exception e){
+        StringWriter sw = null;
+        PrintWriter pw = null;
+        try {
+            sw = new StringWriter();
+            pw =  new PrintWriter(sw);
+            //将出错的栈信息输出到printWriter中
+            e.printStackTrace(pw);
+            pw.flush();
+            sw.flush();
+        } finally {
+            if (sw != null) {
+                try {
+                    sw.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            if (pw != null) {
+                pw.close();
+            }
+        }
+        return sw.toString();
+    }
+
 }

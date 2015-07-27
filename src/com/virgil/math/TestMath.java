@@ -1,5 +1,7 @@
 package com.virgil.math;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import com.virgil.util.LogUtil;
@@ -11,10 +13,18 @@ public class TestMath {
     public static void main(String[] args) {
 //        LogUtil.printlnInConsle(Math.sqrt(81)+"");
 //        testMath();
-        int a=46;
-        float x=Float.valueOf(String.format("%1$.2f", a / 100.0f));
-        LogUtil.printlnInConsle(String.valueOf(x));
-        LogUtil.printlnInConsle(Math.round(x));
+//        int a=46;
+//        float x=Float.valueOf(String.format("%1$.2f", a / 100.0f));
+//        LogUtil.printlnInConsle(String.valueOf(x));
+//        LogUtil.printlnInConsle(Math.round(x));
+        BigDecimal s=new BigDecimal(123.8);
+        BigDecimal result=s.divide(new BigDecimal(3),4,BigDecimal.ROUND_HALF_UP);
+        DecimalFormat df=new DecimalFormat("0.00");
+
+        LogUtil.printlnInConsle(result.floatValue()+"");
+        LogUtil.printlnInConsle(result.doubleValue()+"");
+        LogUtil.printlnInConsle(df.format(result));
+//        LogUtil.printlnInConsle(String.format("%1$.2f", result.doubleValue()));
     }
 
     public static void testMath() {

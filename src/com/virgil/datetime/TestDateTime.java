@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import com.virgil.util.DateTimeUtil;
 import com.virgil.util.LogUtil;
 
 public class TestDateTime {
@@ -18,32 +19,7 @@ public class TestDateTime {
     private String norini = "content-norini";
 
     public static void main(String[] args) {
-//	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//	long a=1398849663;
-//	a=1398310472*1000;
-//	System.out.println(simpleDateFormat.format(new Date(a)));
-//	LogUtil.printlnInConsle(c("yyyy-MM-dd"));
-
-        try {
-
-            DateFormat df = new SimpleDateFormat("yyyyMMdd", Locale.SIMPLIFIED_CHINESE);
-            Date date1 = df.parse("20150729");
-            Date date2 = df.parse("20150730");
-            LogUtil.printlnInConsle(df.format(date1));
-            LogUtil.printlnInConsle(df.format(date2));
-            long minus = (date2.getTime() - date1.getTime()) / (1000);
-            LogUtil.printlnInConsle(minus);
-
-            SimpleDateFormat  df2=new SimpleDateFormat("yyyyMM", Locale.SIMPLIFIED_CHINESE);
-            Date date11=df2.parse(df2.format(date1));
-            Date date22=df2.parse(df2.format(date2));
-            LogUtil.printlnInConsle(df2.format(date1));
-            LogUtil.printlnInConsle(df2.format(date2));
-            long minus2 = (date22.getTime() - date11.getTime()) / (1000);
-            LogUtil.printlnInConsle(minus2);
-        } catch (ParseException e) {
-
-        }
+        LogUtil.printlnInConsle(DateTimeUtil.comareDateByLevel("20151215","20160131",  "yyyyMMdd", "yyyyMM"));
     }
 
     public static String c(String paramString) {
