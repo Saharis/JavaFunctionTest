@@ -158,8 +158,12 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 .idea
+*.iml
+.gradle
 out
 gen
 .settings
 build
 local.properties
+.classpath
+.project
