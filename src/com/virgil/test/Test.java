@@ -24,6 +24,9 @@ import org.apache.xmlbeans.impl.util.Base64;
 
 import com.alibaba.fastjson.JSONObject;
 import com.virgil.mail.FunctionEntrance;
+import com.virgil.reflect.AbstractFather;
+import com.virgil.reflect.NormalFather;
+import com.virgil.reflect.ReflectUtil;
 import com.virgil.util.FileUtil;
 import com.virgil.util.LogUtil;
 import com.virgil.util.StringUtil;
@@ -141,7 +144,10 @@ private FunctionEntrance mFunctionEntrance=new FunctionEntrance();
 //        String date2="20150617164255";
 //        DateTimeUtil.getCurrentDateTime("");
 //        LogUtil.printlnInConsle(DateTimeUtil.compareTwoDateTime(date1, date2));
-        makeFolderPathSafe("/Users/liuwujing/Documents/json.txt ");
+//        makeFolderPathSafe("/Users/liuwujing/Documents/json.txt ");
+        Object s=new NormalFather();
+        AbstractFather s1=ReflectUtil.transObjectToT(s, AbstractFather.class);
+        s1.toString();
     }
 
     public static void makeFolderPathSafe(String filePath) {

@@ -20,4 +20,11 @@ public class ReflectUtil {
         }
         return  null;
     }
+    public static <T> T transObjectToT(Object object, Class<T> classT) {
+        T tTemp=null;
+        if(object!=null && classT.isInstance(object)){
+            tTemp=classT.cast(object);
+        }
+        return tTemp;
+    }
 }
